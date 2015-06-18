@@ -67,4 +67,7 @@ docs/_build/
 
 # PyBuilder
 target/
-
+		
+.idea
+.envrc
+.direnv/
