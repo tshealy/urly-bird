@@ -10,7 +10,14 @@ Create a URL shortener/bookmarking site with Flask.
 
 After completing this assignment, you should be able to:
 
-* TODO
+* Extrapolate from current Django projects to build a new project of substantial size and features
+* Determine which model field types to use to represent data
+* Translate English descriptions of data queries into Django ORM queries
+* Use PostgreSQL to store Django data
+* Make use of Bootstrap and hand-written CSS to style your application
+* Select generic views from Django to speed development
+* Generate charts via Django views
+* Protect access and choose behavior based on user status
 
 ## Details
 
