@@ -2,7 +2,7 @@
 
 ## Description
 
-Create a URL shortener/bookmarking site with Flask.
+Create a URL shortener/bookmarking site with Django.
 
 ## Objectives
 
