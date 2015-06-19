@@ -1,13 +1,55 @@
 <!DOCTYPE html>
+{% load staticfiles %}
+{% load bootstrap3 %}
 <html>
-    {% load staticfiles %}
-    {% load bootstrap3 %}
-
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}"/>
     {% bootstrap_css %}
     {% bootstrap_javascript jquery=1 %}
     <link rel="stylesheet" href="{% static 'style.css' %}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Urly-Bird</title>
-{% block content %}
-{% endblock %}
+    <title>UrlyBird</title>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'bookmark_add' %}"> UrlyBird</a>
+        </div>
+        <ul class="nav navbar-nav navbar-left">
+            <li><a href="{% url 'bookmark_add' %}">Add a bookmark</a></li>
+{#            <li><a href="{% url 'best_movies' %}">Browse Best Movies</a></li>#}
+{#            <li><a href="{% url 'most_movies' %}">Most Reviews</a></li>#}
+{#            <li><a href="{% url 'all_genres' %}">By Genre</a></li>#}
+{#            {% if user.is_authenticated %}#}
+{#            <li><a href="{% url 'show_rater' user.rater.id %}">Your Page</a></li>#}
+{#            {% endif %}#}
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'bookmark_add' %}"> Hi, User{{ user.id }} </a>
+                </li>
+                <li>
+                    <a href="{% url 'logout' %}">logout</a>
+                </li>
+            {% else %}
+                <li>
+                    <a href="{% url 'django.contrib.auth.views.login' %}">Login  </a>
+                </li>
+                <li>
+                    <a href="{% url 'user_register' %}">Register</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    {% bootstrap_messages %}
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
 </html>

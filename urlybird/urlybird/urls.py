@@ -18,11 +18,21 @@ from django.contrib import admin
 from bookmark import views as bookmark_views
 from click import views as click_views
 from django.views.generic import TemplateView
+from django.contrib.auth.decorators import login_required
+from django.views.generic.edit import CreateView
+from django.contrib.auth.forms import UserCreationForm
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url('^', include('django.contrib.auth.urls')),
-    url(r'^register/$', bookmark_views.user_register, name="user_register"),
+    url('^register/', CreateView.as_view(
+            template_name='bookmark/register.html',
+            form_class=UserCreationForm,
+            success_url='/index/'), name= "user_register"),
+    url('^accounts/', include('django.contrib.auth.urls')),
     url(r'^logout/$', bookmark_views.user_logout, name="logout"),
     url(r'^index/', TemplateView.as_view(template_name="bookmark/index.html")),
+    url(r'bookmark/add/$',bookmark_views.BookmarkCreate.as_view(), name='bookmark_add'),
+    url(r'bookmark/(?P<pk>[0-9]+)/$', bookmark_views.BookmarkUpdate.as_view(), name='bookmark_update'),
+    url(r'bookmark/(?P<pk>[0-9]+)/delete/$', bookmark_views.BookmarkDelete.as_view(), name='bookmark_delete'),
 ]
