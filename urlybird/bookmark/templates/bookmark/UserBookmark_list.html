@@ -1,0 +1,16 @@
+{% extends "bookmark/base.html" %}
+
+{% block content %}
+    {% if user.id == user_to_display.id %}
+    <h1>Your bookmarks</h1>
+        {% for bookmark in user_bookmarks %}
+                <li class="list-unstyled">{{ bookmark.title }}
+                   <strong>{{ bookmark.long }}</strong> created at
+                    {{ bookmark.created }} by you.</li>
+                <li class="list-comment">
+                    <a class="padded-delete" href="{% url 'bookmark-update' bookmark.id %}">Edit </a>
+                    <a class="padded-delete" href="{% url 'bookmark_delete' bookmark.id %}">Delete</a></li>
+        {% endfor %}
+    {%  endif %}
+    </ul>
+{% endblock %}

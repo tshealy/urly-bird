@@ -18,3 +18,4 @@ class Bookmark(models.Model):
 
     def get_absolute_url(self):
         return reverse('/index/', kwargs={'pk': self.pk})
+#send to bookmark detail

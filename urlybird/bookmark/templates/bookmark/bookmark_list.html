@@ -1,0 +1,14 @@
+{% extends "bookmark/base.html" %}
+
+{% block content %}
+    <h2>Bookmarks</h2>
+    <ul>
+        {% for bookmark in bookmarks %}
+            {{ bookmark.title }}
+            <ul> <a href="{ bookmark.long }"> {{ bookmark.long }} </a>
+                | Created at: {{ bookmark.created }}  | By: {{ bookmark.user }}
+            </ul>
+        {% endfor %}
+    </ul>
+{% endblock %}
+

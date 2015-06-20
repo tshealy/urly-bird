@@ -1,0 +1,9 @@
+{% extends "bookmark/base.html" %}
+
+{% block content %}
+    <h1>Bookmark stat info</h1>
+        {{ bookmark }}
+                <li class="list-unstyled">{{ bookmark.title }}
+                   <strong>{{ bookmark.long }}</strong> created at
+                    {{ bookmark.created }} </li>
+{% endblock %}

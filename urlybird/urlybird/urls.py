@@ -17,7 +17,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from bookmark import views as bookmark_views
 from click import views as click_views
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView
 from django.contrib.auth.forms import UserCreationForm
@@ -33,6 +33,10 @@ urlpatterns = [
     url(r'^logout/$', bookmark_views.user_logout, name="logout"),
     url(r'^index/', TemplateView.as_view(template_name="bookmark/index.html")),
     url(r'bookmark/add/$',bookmark_views.BookmarkCreate.as_view(), name='bookmark_add'),
-    url(r'bookmark/(?P<pk>[0-9]+)/$', bookmark_views.BookmarkUpdate.as_view(), name='bookmark_update'),
+    url(r'bookmark/(?P<pk>[0-9]+)/update/$', bookmark_views.BookmarkUpdate.as_view(), name='bookmark_update'),
     url(r'bookmark/(?P<pk>[0-9]+)/delete/$', bookmark_views.BookmarkDelete.as_view(), name='bookmark_delete'),
+    url(r'^bookmark/allbookmarks', bookmark_views.BookmarkList.as_view(), name='bookmark_list'),
+    url(r'^bookmark/user_bookmarks/(?P<user_id>[0-9]+)/$', bookmark_views.UserBookmarkList.as_view(), name='user_bookmarks'),
+    url(r'b/(?P<short_id>[A-Za-z0-9]+)/$', click_views.click_tracker, name='click_tracker'),
+    url(r'bookmark/display/(?P<pk>[0-9]+)/$', bookmark_views.bookmark_display, name='bookmark_display'),
 ]
