@@ -4,6 +4,7 @@
     <h1>Bookmark stat info</h1>
         {{ bookmark }}
                 <li class="list-unstyled">{{ bookmark.title }}
+                    Number of Clicks: {{ number_clicks }}
                    <strong>{{ bookmark.long }}</strong> created at
                     {{ bookmark.created }} </li>
 {% endblock %}
