@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from bookmark.models import Bookmark
 from click.models import Click
-
+from hashids import Hashids
 
 
 class ClickSerializer(serializers.HyperlinkedModelSerializer):
@@ -12,11 +12,23 @@ class ClickSerializer(serializers.HyperlinkedModelSerializer):
 
 class BookmarkSerializer(serializers.HyperlinkedModelSerializer):
      user = serializers.PrimaryKeyRelatedField(read_only=True)
-     # click = ClickSerializer(many=True, read_only=True)
      click = serializers.HyperlinkedIdentityField(view_name='click-list')
-     # id = serializers.HyperlinkedIdentityField(view_name='id')
+     # url = serializers.HyperlinkedIdentityField(view_name='bookmark-detail')
+
+     def create(self, validated_data):
+         hashids = Hashids(min_length = 4, salt="browndogbella")
+         previous = Bookmark.objects.latest('id')
+         previousid = previous.id
+         if previous.id is None:
+             previousid = 0
+         bookmark = Bookmark.objects.create(**validated_data)
+         bookmark.short = hashids.encrypt(previousid + 1)
+         bookmark.save()
+         return bookmark
+
+
      class Meta:
          model = Bookmark
-         fields = ('user', 'title', 'description', 'long', 'short', 'created', 'edited',  'click', 'total_clicks')
+         fields = ('id', 'user', 'title', 'description', 'url', 'long', 'short', 'created', 'edited',  'click', 'total_clicks')
 
 
