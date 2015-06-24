@@ -14,6 +14,7 @@ class BookmarkSerializer(serializers.HyperlinkedModelSerializer):
      user = serializers.PrimaryKeyRelatedField(read_only=True)
      click = serializers.HyperlinkedIdentityField(view_name='click-list')
      # url = serializers.HyperlinkedIdentityField(view_name='bookmark-detail')
+     short = serializers.CharField(read_only=True)
 
      def create(self, validated_data):
          hashids = Hashids(min_length = 4, salt="browndogbella")
