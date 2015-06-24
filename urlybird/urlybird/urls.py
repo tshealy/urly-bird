@@ -27,6 +27,7 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register(r"bookmarks", api_views.BookmarkViewSet, base_name='bookmark')
+# router.register(r'users', api_views.UserViewSet)
 # router.register(r"^api/clicks", api_views.ClickViewSet)
 
 
@@ -54,5 +55,8 @@ urlpatterns = [
     # url(r'^api/bookmarks/(?P<pk>\d+)$', api_views.BookmarkViewSet, name='bookmark-detail'),
     url(r'^api/bookmarks/click/(?P<pk>\d+)$', api_views.ClickDetailView.as_view(), name='click-detail'),
     url(r'^api/bookmarks/(?P<pk>\d+)/clickset$', api_views.ClickList.as_view(), name='click-list'),
+    url(r'^api/userset/$', api_views.UserList.as_view(), name='user-list'),
+    url(r'^api/users/(?P<pk>\d+)$', api_views.UserDetailView.as_view(), name='user-detail'),
+    url(r'^api/user/$', api_views.UserCreateView.as_view(), name='user-create'),
 ]
 

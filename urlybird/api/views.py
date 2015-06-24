@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from rest_framework import viewsets, permissions, generics, filters
-from .serializers import BookmarkSerializer, ClickSerializer
+from .serializers import BookmarkSerializer, ClickSerializer, UserSerializer
 from bookmark.models import Bookmark
 from click.models import Click
 from .permissions import IsOwnerOrReadOnly, OwnsRelatedBookmark
 from rest_framework.exceptions import PermissionDenied
 import django_filters
+from django.contrib.auth.models import User
+
+
 # Create your views here.
 
 class BookmarkFilter(django_filters.FilterSet):
@@ -59,3 +62,27 @@ class ClickDetailView(generics.RetrieveUpdateDestroyAPIView):
                           OwnsRelatedBookmark)
     serializer_class = ClickSerializer
     queryset = Click.objects.all()
+
+
+# class UserViewSet(viewsets.ModelViewSet):
+#     """
+#     API endpoint that allows users to be viewed or edited.
+#     """
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
+
+class UserList(generics.ListAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+
+
+class UserCreateView(generics.CreateAPIView):
+    # permission_classes = (permissions.IsAuthenticated)
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+
+class UserDetailView(generics.RetrieveUpdateAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = UserSerializer
+    queryset = User.objects.all()

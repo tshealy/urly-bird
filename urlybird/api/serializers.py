@@ -2,7 +2,7 @@ from rest_framework import serializers
 from bookmark.models import Bookmark
 from click.models import Click
 from hashids import Hashids
-
+from django.contrib.auth.models import User
 
 class ClickSerializer(serializers.HyperlinkedModelSerializer):
     # bookmark = BookmarkSerializer(many=True, read_only=True)
@@ -33,3 +33,7 @@ class BookmarkSerializer(serializers.HyperlinkedModelSerializer):
          fields = ('id', 'user', 'title', 'description', 'url', 'long', 'short', 'created', 'edited',  'click', 'total_clicks')
 
 
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = User
+        fields = ('url', 'username', 'email')
