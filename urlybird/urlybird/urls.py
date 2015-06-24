@@ -26,7 +26,8 @@ from django.views.generic import TemplateView
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register(r"^api/bookmarks", api_views.BookmarkViewSet)
+router.register(r"^api/bookmarks", api_views.BookmarkViewSet, base_name='bookmark')
+# router.register(r"^api/clicks", api_views.ClickViewSet)
 # router.register(r"^api/clicks", api_views.ClickViewSet)
 
 
@@ -51,6 +52,6 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace ='rest_framework')),
     url(r'^api/clicks/$', api_views.ClickCreateView.as_view()), #needs a bookmark-detail
     url(r'^api/bookmarks/click/(?P<pk>\d+)$', api_views.ClickDetailView.as_view(), name='click-detail'),
-    url(r'^api/bookmarks/clickset/(?P<pk>\d+)$', api_views.ClickList.as_view(), name='click-list'),
+    url(r'^api/bookmarks/(?P<pk>\d+)/clickset$', api_views.ClickList.as_view(), name='click-list'),
 ]
 

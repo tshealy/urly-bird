@@ -116,3 +116,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/index/'
 
+REST_FRAMEWORK = {
+    'PAGE_SIZE': 10
+}
